@@ -60,7 +60,7 @@ class SpotifyChartsAPI
     {
         $path = sprintf('regional-%s-%s/%s', $country, $period, $date);
 
-        if(!empty($genre)) {
+        if (!empty($genre)) {
             $path = sprintf('genresongs-%s-%s/%s', $genre, $period, $date);
         }
 

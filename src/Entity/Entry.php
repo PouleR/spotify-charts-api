@@ -46,7 +46,7 @@ class Entry
      */
     public function setChartEntryData(array $chartEntryData): void
     {
-        $this->chartEntryData = $this->normalizer->denormalize($chartEntryData, ChartEntryData::class);;
+        $this->chartEntryData = $this->normalizer->denormalize($chartEntryData, ChartEntryData::class);
     }
 
     /**
@@ -106,6 +106,6 @@ class Entry
      */
     public function setAlbumMetadata(array $albumMetadata): void
     {
-        $this->albumMetadata = $this->normalizer->denormalize($albumMetadata, AlbumMetadata::class);;
+        $this->albumMetadata = $this->normalizer->denormalize($albumMetadata, AlbumMetadata::class);
     }
 }
