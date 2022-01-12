@@ -3,7 +3,6 @@
 namespace PouleR\SpotifyChartsAPI;
 
 use PouleR\SpotifyChartsAPI\Entity\SpotifyChart;
-use PouleR\SpotifyLogin\SpotifyLogin;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
@@ -16,19 +15,16 @@ use Throwable;
 class SpotifyChartsAPI
 {
     protected SpotifyChartsAPIClient $client;
-    protected SpotifyLogin $spotifyLogin;
     protected ?LoggerInterface $logger = null;
     protected ObjectNormalizer $normalizer;
 
     /**
      * @param SpotifyChartsAPIClient $client
-     * @param SpotifyLogin           $spotifyLogin
      * @param LoggerInterface|null   $logger
      */
-    public function __construct(SpotifyChartsAPIClient $client, SpotifyLogin $spotifyLogin, LoggerInterface $logger = null)
+    public function __construct(SpotifyChartsAPIClient $client, LoggerInterface $logger = null)
     {
         $this->client = $client;
-        $this->spotifyLogin = $spotifyLogin;
         $this->logger = $logger;
 
         if (!$logger) {
@@ -117,7 +113,6 @@ class SpotifyChartsAPI
         $path = sprintf('viral-%s-daily/%s', $country, $date);
 
         return $this->executeAPIRequest($path);
-
     }
 
     /**

@@ -12,25 +12,26 @@ Install it using [Composer](https://getcomposer.org/):
 composer require pouler/spotify-charts-api
 ```
 
+## Spotify login
+You can obtain an access token by using the SpotifyLogin class, this dependency can be installed by using:
+
+```sh
+composer require pouler/spotify-login
+```
+
+For more information about this project see: https://github.com/PouleR/spotify-login
 
 ## Example usage
+
 ```php
 <?php declare(strict_types=1);
 
 require 'vendor/autoload.php';
 
 $httpClient = new \Symfony\Component\HttpClient\CurlHttpClient();
-$client = new \PouleR\SpotifyChartsAPI\SpotifyChartsAPIClient($httpClient);
-$loginClient = new \PouleR\SpotifyLogin\SpotifyLoginClient($httpClient);
-$spotifyLogin = new \PouleR\SpotifyLogin\SpotifyLogin($loginClient);
-$spotifyApi = new \PouleR\SpotifyChartsAPI\SpotifyChartsAPI($client, $spotifyLogin);
-
-$spotifyLogin->setClientId('clientId');
-$spotifyLogin->setDeviceId('deviceId');
-
-// Log in and get the access token
-$token = $spotifyLogin->login('email@address.com','password');
-$spotifyApi->setAccessToken($token->getAccessToken());
+$apiClient = new \PouleR\SpotifyChartsAPI\SpotifyChartsAPIClient($httpClient);
+$spotifyApi = new \PouleR\SpotifyChartsAPI\SpotifyChartsAPI($apiClient);
+$spotifyApi->setAccessToken('access.token');
 
 $charts = $spotifyApi->getRegionalTopSongs('nl', 'weekly');
 
