@@ -1,0 +1,39 @@
+{
+    "name": "pouler/spotify-charts-api",
+    "description": "PHP Wrapper for spotifycharts.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paul Radt",
+            "email": "paulradt@gmail.com"
+        }
+    ],
+    "keywords": [ "spotify", "api" ],
+    "homepage": "https://github.com/PouleR/spotify-charts-api",
+    "type": "library",
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpunit/phpunit": "^9"
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "pouler/spotify-login": "^v0.1",
+        "symfony/http-client": "^4.3|^4.4|^5.0|^6",
+        "symfony/property-access": "^4.3|^4.4|^5|^6",
+        "symfony/serializer": "^4.3|^4.4|^5|^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "PouleR\\SpotifyChartsAPI\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PouleR\\SpotifyChartsAPI\\Tests\\": "tests/"
+        }
+    }
+}
