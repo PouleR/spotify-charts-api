@@ -3,7 +3,6 @@
 namespace PouleR\SpotifyChartsAPI;
 
 use PouleR\SpotifyChartsAPI\Entity\SpotifyChart;
-use PouleR\SpotifyChartsAPI\Exception\SpotifyChartsAPIException;
 use PouleR\SpotifyLogin\SpotifyLogin;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -47,7 +46,6 @@ class SpotifyChartsAPI
         $this->client->setAccessToken($accessToken);
     }
 
-
     /**
      * @param string $country Allowed values are 'global' or the ISO 3166-1 alpha-2 country code
      * @param string $period  Allowed values are 'daily' or 'weekly'
@@ -64,15 +62,7 @@ class SpotifyChartsAPI
             $path = sprintf('genresongs-%s-%s/%s', $genre, $period, $date);
         }
 
-        try {
-            $response = $this->client->apiRequest('GET', $path);
-
-            return $this->normalizer->denormalize($response, SpotifyChart::class);
-        } catch (\Exception | \Throwable $exception) {
-            $this->logError(__FUNCTION__, $exception);
-        }
-
-        return null;
+        return $this->executeAPIRequest($path);
     }
 
     /**
@@ -86,15 +76,7 @@ class SpotifyChartsAPI
     {
         $path = sprintf('city%strack-%s-weekly/%s', $type, $city, $date);
 
-        try {
-            $response = $this->client->apiRequest('GET', $path);
-
-            return $this->normalizer->denormalize($response, SpotifyChart::class);
-        } catch (\Exception | \Throwable $exception) {
-            $this->logError(__FUNCTION__, $exception);
-        }
-
-        return null;
+        return $this->executeAPIRequest($path);
     }
 
     /**
@@ -108,15 +90,7 @@ class SpotifyChartsAPI
     {
         $path = sprintf('artist-%s-%s/%s', $country, $period, $date);
 
-        try {
-            $response = $this->client->apiRequest('GET', $path);
-
-            return $this->normalizer->denormalize($response, SpotifyChart::class);
-        } catch (\Exception | \Throwable $exception) {
-            $this->logError(__FUNCTION__, $exception);
-        }
-
-        return null;
+        return $this->executeAPIRequest($path);
     }
 
     /**
@@ -129,15 +103,7 @@ class SpotifyChartsAPI
     {
         $path = sprintf('album-%s-weekly/%s', $country, $date);
 
-        try {
-            $response = $this->client->apiRequest('GET', $path);
-
-            return $this->normalizer->denormalize($response, SpotifyChart::class);
-        } catch (\Exception | \Throwable $exception) {
-            $this->logError(__FUNCTION__, $exception);
-        }
-
-        return null;
+        return $this->executeAPIRequest($path);
     }
 
     /**
@@ -150,6 +116,17 @@ class SpotifyChartsAPI
     {
         $path = sprintf('viral-%s-daily/%s', $country, $date);
 
+        return $this->executeAPIRequest($path);
+
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return SpotifyChart|null
+     */
+    private function executeAPIRequest(string $path): ?SpotifyChart
+    {
         try {
             $response = $this->client->apiRequest('GET', $path);
 
