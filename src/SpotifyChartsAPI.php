@@ -120,6 +120,48 @@ class SpotifyChartsAPI
     }
 
     /**
+     * @param string $country Allowed values are 'global' or the ISO 3166-1 alpha-2 country code
+     * @param string $date    Allowed values are 'latest' or 'YYYY-MM-DD'
+     *
+     * @return SpotifyChart|null
+     */
+    public function getTopAlbums(string $country = 'global', string $date = 'latest'): ?SpotifyChart
+    {
+        $path = sprintf('album-%s-weekly/%s', $country, $date);
+
+        try {
+            $response = $this->client->apiRequest('GET', $path);
+
+            return $this->normalizer->denormalize($response, SpotifyChart::class);
+        } catch (\Exception | \Throwable $exception) {
+            $this->logError(__FUNCTION__, $exception);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string $country Allowed values are 'global' or the ISO 3166-1 alpha-2 country code
+     * @param string $date    Allowed values are 'latest' or 'YYYY-MM-DD'
+     *
+     * @return SpotifyChart|null
+     */
+    public function getViralSongs(string $country = 'global', string $date = 'latest'): ?SpotifyChart
+    {
+        $path = sprintf('viral-%s-daily/%s', $country, $date);
+
+        try {
+            $response = $this->client->apiRequest('GET', $path);
+
+            return $this->normalizer->denormalize($response, SpotifyChart::class);
+        } catch (\Exception | \Throwable $exception) {
+            $this->logError(__FUNCTION__, $exception);
+        }
+
+        return null;
+    }
+
+    /**
      * @param string     $method
      * @param Throwable $exception
      */
