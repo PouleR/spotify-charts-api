@@ -14,6 +14,7 @@ class Entry
     private ObjectNormalizer $normalizer;
     private ChartEntryData $chartEntryData;
     private TrackMetadata $trackMetadata;
+    private ArtistMetadata $artistMetadata;
 
     /**
      *
@@ -21,6 +22,9 @@ class Entry
     public function __construct()
     {
         $this->normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
+        $this->trackMetadata = new TrackMetadata();
+        $this->chartEntryData = new ChartEntryData();
+        $this->artistMetadata = new ArtistMetadata();
     }
 
     /**
@@ -61,5 +65,25 @@ class Entry
     public function setTrackMetadata(array $trackMetadata): void
     {
         $this->trackMetadata = $this->normalizer->denormalize($trackMetadata, TrackMetadata::class);
+    }
+
+    /**
+     * @return ArtistMetadata
+     */
+    public function getArtistMetadata(): ArtistMetadata
+    {
+        return $this->artistMetadata;
+    }
+
+    /**
+     * @param array $artistMetadata
+     *
+     * @return void
+     *
+     * @throws ExceptionInterface
+     */
+    public function setArtistMetadata(array $artistMetadata): void
+    {
+        $this->artistMetadata = $this->normalizer->denormalize($artistMetadata, ArtistMetadata::class);
     }
 }

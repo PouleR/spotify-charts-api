@@ -20,6 +20,14 @@ class ChartMetadata
     private Dimensions $dimensions;
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->dimensions = new Dimensions();
+    }
+
+    /**
      * @return string
      */
     public function getUri(): string

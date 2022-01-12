@@ -16,6 +16,14 @@ class DisplayChart
     private string $description = '';
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->chartMetadata = new ChartMetadata();
+    }
+
+    /**
      * @return \DateTime|null
      */
     public function getDate(): ?\DateTime

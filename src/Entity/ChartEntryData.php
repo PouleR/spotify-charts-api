@@ -22,6 +22,14 @@ class ChartEntryData
     private ?\DateTime $entryDate = null;
 
     /**
+     *
+     */
+    public function __construct()
+    {
+        $this->rankingMetric = new RankingMetric();
+    }
+
+    /**
      * @return int
      */
     public function getCurrentRank(): int

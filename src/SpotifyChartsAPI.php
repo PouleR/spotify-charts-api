@@ -98,6 +98,28 @@ class SpotifyChartsAPI
     }
 
     /**
+     * @param string $country Allowed values are 'global' or the ISO 3166-1 alpha-2 country code
+     * @param string $period  Allowed values are 'daily' or 'weekly'
+     * @param string $date    Allowed values are 'latest' or 'YYYY-MM-DD'
+     *
+     * @return SpotifyChart|null
+     */
+    public function getTopArtists(string $country = 'global', string $period = 'daily', string $date = 'latest'): ?SpotifyChart
+    {
+        $path = sprintf('artist-%s-%s/%s', $country, $period, $date);
+
+        try {
+            $response = $this->client->apiRequest('GET', $path);
+
+            return $this->normalizer->denormalize($response, SpotifyChart::class);
+        } catch (\Exception | \Throwable $exception) {
+            $this->logError(__FUNCTION__, $exception);
+        }
+
+        return null;
+    }
+
+    /**
      * @param string     $method
      * @param Throwable $exception
      */

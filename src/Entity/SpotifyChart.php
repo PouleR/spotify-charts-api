@@ -31,6 +31,7 @@ class SpotifyChart
     public function __construct()
     {
         $this->normalizer = new ObjectNormalizer(null, new CamelCaseToSnakeCaseNameConverter());
+        $this->displayChart = new DisplayChart();
     }
 
     /**
