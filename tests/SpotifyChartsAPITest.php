@@ -41,6 +41,18 @@ class SpotifyChartsAPITest extends TestCase
     /**
      * @return void
      */
+    public function testAccessToken(): void
+    {
+        $this->apiClient->expects(self::once())
+            ->method('setAccessToken')
+            ->with('tokentest');
+
+        $this->spotifyCharts->setAccessToken('tokentest');
+    }
+
+    /**
+     * @return void
+     */
     public function testExceptionDuringRequest(): void
     {
         $this->apiClient->expects(self::once())
