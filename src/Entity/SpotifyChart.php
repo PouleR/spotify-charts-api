@@ -14,16 +14,16 @@ class SpotifyChart
     private ObjectNormalizer $normalizer;
 
     /** @var CountryFilter[] */
-    private array $countryFilters;
+    private array $countryFilters = [];
     private DisplayChart $displayChart;
 
     /**
      * @var Entry[]
      */
-    private array $entries;
+    private array $entries = [];
 
     /** @var Highlight[] */
-    private array $highlights;
+    private array $highlights = [];
 
     /**
      *

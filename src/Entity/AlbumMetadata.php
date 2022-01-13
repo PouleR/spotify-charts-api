@@ -18,10 +18,10 @@ class AlbumMetadata
     private string $displayImageUri = '';
 
     /** @var Artist[] */
-    private array $artists;
+    private array $artists = [];
 
     /** @var Label[] */
-    private array $labels;
+    private array $labels = [];
 
     private ?\DateTime $releaseDate = null;
 
