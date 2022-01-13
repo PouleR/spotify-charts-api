@@ -21,7 +21,9 @@ class SpotifyChartTest extends TestCase
         $this->spotifyChart = new SpotifyChart();
         $this->spotifyChart->setCountryFilters([['code' => 'us']]);
         $this->spotifyChart->setDisplayChart(['description' => 'test']);
-        $this->spotifyChart->setEntries([]);
+        $entry = new \stdClass();
+        $entry->trackMetadata = ['trackName' => 'test'];
+        $this->spotifyChart->setEntries([$entry]);
         $this->spotifyChart->setHighlights([['text' => 'highlight']]);
     }
 
@@ -50,7 +52,9 @@ class SpotifyChartTest extends TestCase
      */
     public function testEntries(): void
     {
-        self::assertCount(0, $this->spotifyChart->getEntries());
+        $entries = $this->spotifyChart->getEntries();
+        self::assertCount(1, $entries);
+        self::assertEquals('test', $entries[0]->getTrackMetadata()->getTrackName());
     }
 
     /**
