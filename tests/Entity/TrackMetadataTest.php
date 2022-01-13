@@ -57,7 +57,7 @@ class TrackMetadataTest extends TestCase
      */
     public function testTrackUri(): void
     {
-        self::assertEquals('test', $this->trackMetadata->getTrackName());
+        self::assertEquals('track.uri', $this->trackMetadata->getTrackUri());
     }
 
     /**
