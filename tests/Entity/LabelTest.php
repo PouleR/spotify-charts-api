@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace PouleR\SpotifyChartsAPI\Tests;
+namespace PouleR\SpotifyChartsAPI\Tests\Entity;
 
 use PHPUnit\Framework\TestCase;
 use PouleR\SpotifyChartsAPI\Entity\Label;
